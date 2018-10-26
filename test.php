@@ -9,17 +9,19 @@
         Probably start with that first.
         
 */
-if(count($argv) < 2)
-    die();
-$search = $argv[1];
-$test   = file_get_contents("https://jisho.org/api/v1/search/words?keyword=$search");
-$test   = json_decode($test);
-$data   = $test->data;
 
+$words = fopen("output.txt", "r");
+while($line = fgets($words)){
+    print_r(getDataForWord(urlencode($line)));
+}    
+    
+function getDataForWord($word){
+    $test   = file_get_contents("https://jisho.org/api/v1/search/words?keyword=$word");
+    $test   = json_decode($test);
+    $data   = $test->data;
+    return getJapaneseWithEnglish($data);
+}    
 
-//print_r(getJapaneseInfo($data));
-//print_r(getEnglishMeaning($data));
-print_r(getJapaneseWithEnglish($data));
 function getJapaneseInfo($data, $limit = 3){
     $result = array();
     for($i = 0; $i < count($data) && $i < $limit; $i++){    
