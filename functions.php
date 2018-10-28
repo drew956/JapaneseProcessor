@@ -111,4 +111,37 @@ print(
 
 
 
+
+
+
+function printCarousel($images){
+print <<<END
+<div id="carousel" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+END;
+if(count($images) >= 2){
+    echo '<div class="carousel-item active text-center">' . "\n" .
+           "    <img class=' img-responsive center-block' src='images/$images[0]' alt='$images[1]'>\n" .
+         "</div>\n";
+}
+for($i = 2; $i < count($images) - 1; $i += 2){
+    echo '<div class="carousel-item text-center">' . "\n" .
+           "    <img class='img-fluid' src='images/" . $images[$i] . "' alt='" . $images[$i+1] . "'>\n" .
+         "</div>\n";
+    echo <<<END
+  <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+END;
+}
+
+}
+
+
 ?>

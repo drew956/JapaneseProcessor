@@ -5,7 +5,7 @@
             printHead("Home", array("main_style.css"));
             $elements = array(
             getNavLink("Home", "home.php", "active"),
-            getNavLink("Books"),
+            getNavLink("Books", "books.php"),
             getNavDropDown("Logan", array(
                     "Activities" => "#",
                     "Profile" => "profile.php"
@@ -24,11 +24,19 @@
                         <p>Sample text 1</p>
                     </div>
                 </div>
-                <div class='panel col-lg-6 col-md-6' style="text-align: center;">
-                    <div class='content col-lg-12 col-md-12 cell' style="text-align: center;">
-                        <p>Sample text 2</p>
-                        <p>User Activity</p>
-                        <p>random word from one of the books</p>
+                <div class='panel col-lg-6 col-md-6 text-center' >
+                    <div class=' col-lg-12 col-md-12 text-center' >
+                        <?php
+                        $images = array(
+                            "book.jpg",
+                            "Japanese Baths",
+                            "book.jpg",
+                            "Another Story",
+                            "book.jpg",
+                            "Something else"
+                        );
+                        printCarousel($images);
+                        ?>
                     </div>
                 </div>
                 <div class='panel separate col-lg-3 col-md-3' style="text-align: center;">
