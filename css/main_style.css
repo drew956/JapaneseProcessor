@@ -1,0 +1,67 @@
+div.cellTop {
+    border-top:    2px solid black;
+    border-left:   2px solid black;
+    border-right:  2px solid black;
+    border-bottom: 1px solid black;
+    border-radius: 5px 5px 0 0;
+    overflow: auto;
+}
+div.headerCell{
+    background-color: grey;
+    color: black;
+}
+div.cell{
+    border-top:    1px solid black;
+    border-left:   2px solid black;
+    border-right:  2px solid black;
+    border-bottom: 1px solid black;
+    background-color: lightgrey;
+    overflow: auto;
+}
+div.cellBottom{
+    border:     2px solid black;
+    border-top: 1px solid black;
+    background-color: lightgrey;
+    overflow: auto;
+}
+div.roundedBottom {
+    border-radius: 0px 0px 5px 5px;            
+}
+div.panel{
+    border-top:    2px solid rgb(0,0,125);
+    border-left:   2px solid rgb(0,0,125);
+    border-right:  2px solid rgb(0,0,125);
+    border-bottom: 2px solid rgb(0,0,125);
+    /* border-radius: 5px 5px 5px 5px; */
+    padding: 20px;
+    background-color: lightblue;
+    overflow: auto;
+}
+div.content{
+    border-top:    2px solid black;
+    border-left:   2px solid black;
+    border-right:  2px solid black;
+    border-bottom: 2px solid black;
+    border-radius: 3px 3px 3px 3px;
+    background-color: lightgrey;
+    overflow: auto;
+}
+div.separate > div:not(:last-child):not(.cell):not(.cellBottom):not(.cellTop) {
+  margin-bottom: 20px;
+}
+div.separate > div:not(:first-child):not(:last-child):not(.cell):not(.cellBottom):not(.cellTop) {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+div.separate > div.cellTop:not(:first-child) {
+  margin-top: 20px;
+}
+div.separate > div.cellBottom:not(:last-child) {
+  margin-bottom: 20px;
+}
+.text-center {
+    text-align: center;
+}
+body {
+    background-color: black;
+}
