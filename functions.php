@@ -18,8 +18,11 @@ function getDropDown($submenus){
     $text .= "</div>\n";
     return $text;
 }
-function getNavDropDown($menuTitle, $submenus, $dividerIndex = 0){
-    $text = '<li class="nav-item dropdown">' . "\n";
+/* 
+    Class is used to make the menu "active". (i.e. to show that it is highlighted)
+*/
+function getNavDropDown($menuTitle, $submenus, $class = "" ,$dividerIndex = 0){
+    $text = "<li class=\"nav-item dropdown $class\">" . "\n";
     $text .= '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . 
               $menuTitle . "</a>\n";
     $text .= getDropDown($submenus);
@@ -29,7 +32,7 @@ function getNavDropDown($menuTitle, $submenus, $dividerIndex = 0){
 
 function navBar($elements){
 ?>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -143,5 +146,36 @@ END;
 
 }
 
-
+/* 
+    For the purpose of this website the navbar will be static.
+    I.e. it will not suddenly have new items in it just because you are on a different page.
+    Thus, although I dislike doing it, I will put the layout of the navbar in here.
+    (by layout I mean the variables specifying where everything is)
+    
+    NOTICE this function uses "active", which is the name of the item in the navbar to highlight
+*/
+function setUpNavBar($active){
+    $content = array(
+        "Home" => "home.php",
+        "Books" => "books.php",
+        "Logan" => array(
+            "Activities" => "activity.php",
+            "Profile"    => "profile.php")
+    );
+    $elements = array();
+    foreach($content as $name => $href){
+        if(gettype($href) == "array"){ //if it is a dropdown
+            if($name == $active)
+                $elements[] = getNavDropDown($name, $href, "active");
+            else
+                $elements[] = getNavDropDown($name, $href);
+        }else{
+            if($name == $active)
+                $elements[] = getNavLink($name, $href, "active");
+            else
+                $elements[] = getNavLink($name, $href);
+        }
+    }
+    navBar($elements);
+}
 ?>

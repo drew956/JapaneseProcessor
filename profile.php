@@ -2,32 +2,61 @@
     require_once("functions.php");
 ?>
 <?php
-            printHead("Books", array("main_style.css", "books.css"));
-            setUpNavBar("Books");
-
+            printHead("Profile", array("main_style.css", "profile.css"));
+            setUpNavBar("Logan");
         ?>
         <div class="container-fluid" style="border: 1px solid black;">
-            <div class='row'>            
-                <div class='panelTop col-lg-12 col-md-12  text-center' >
-                    <div class='heading col-lg-4 col-md-4 offset-lg-4 offset-md-4 text-center' style="font-family: Palatino Linotype;" >
-                        Test text
-                    </div>
-                    <div class=' col-lg-4 col-md-4 offset-lg-4 offset-md-4 text-center' >
-                        <?php
-                        $images = array(
-                            "book.jpg",
-                            "Japanese Baths",
-                            "book.jpg",
-                            "Another Story",
-                            "book.jpg",
-                            "Something else"
-                        );
-                        printCarousel($images);
-                        ?>
+            <div class='row' >
+                <div class='panel col-lg-3 col-md-3' style="text-align: center;">
+                    <div class="">
+                        <p>Sample text 1</p>
                     </div>
                 </div>
-            </div>
-            <div class='row' >
+                <div class='panel separate col-lg-6 col-md-6' style="text-align: center;">
+                    <div class="content">
+                        <p>Recently studied Kanji and Vocabulary</p>
+                        <p>Clickable to allow you to go and look up specific words??</p>
+                    </div>
+                    <div class="row cellTop headerCell">
+                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4' style="text-align: center;">
+                            Date
+                        </div>            
+                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4' style="text-align: center;">
+                            Kanji
+                        </div>
+                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4' style="text-align: center; ">
+                            Meaning
+                        </div>
+                    </div>
+                    <div class="row cell" >
+                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4' style="text-align: center;">
+                            10/25/18
+                        </div>            
+                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4' style="text-align: center;">
+                            家
+                        </div>
+                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4' style="text-align: center;">
+                            House
+                        </div>
+                    </div>
+                    <div class="row cellBottom">
+                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4' style="text-align: center;">
+                            10/26/18
+                        </div>            
+                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4' style="text-align: center;">
+                            私
+                        </div>
+                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4' style="text-align: center;">
+                            Me, my.
+                        </div>
+                    </div>
+                </div>
+                <div class='panel col-lg-3 col-md-3 text-center' >
+                    <div class=' col-lg-12 col-md-12 text-center' >
+                        <p>Sample text 2</p>
+                    </div>
+                </div>
+
                 
                 <div class='panel col-lg-12 col-md-12' style="text-align: center;">
                     <div class="row cellTop headerCell">

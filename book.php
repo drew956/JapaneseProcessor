@@ -3,14 +3,8 @@
 ?>
 <?php
             printHead("Books", array("main_style.css", "book.css"));
-            $elements = array(
-            getNavLink("Home", "home.php"),
-            getNavLink("Books", "books.php", "active"),
-            getNavDropDown("Logan", array(
-                    "Activities" => "#",
-                    "Profile" => "profile.php"
-            )));
-            navBar($elements);
+            setUpNavBar("Books");
+
         ?>
         <div class="container-fluid" style="border: 1px solid black;">
             <div class='row' style=" ">
