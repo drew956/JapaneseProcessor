@@ -3,14 +3,7 @@
 ?>
 <?php
             printHead("Home", array("main_style.css"));
-            $elements = array(
-            getNavLink("Home", "home.php", "active"),
-            getNavLink("Books", "books.php"),
-            getNavDropDown("Logan", array(
-                    "Activities" => "#",
-                    "Profile" => "profile.php"
-            )));
-            navBar($elements);
+            setUpNavBar("Home");
         ?>
         <div class="container-fluid" style="border: 1px solid black;">
             <div class="row text-center" style="background-color: rgba(0,0,191,0.5); color: green;">

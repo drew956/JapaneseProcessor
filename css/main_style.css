@@ -1,3 +1,54 @@
+/*
+    Maybe should have
+    div.rowTop
+    div.rowMiddle
+    div.rowBottom classes for putting borders on rows.
+    (instead of panelTop panel and panelBottom)
+    
+    then we could have
+    div.rowTop > div.panelTop, div.rowTop > div.panel, div.rowTop > div.panelBottom,
+    div.row    > div.panelTop, div.row    > div.panel, div.row    > div.panelBottom,
+    div.rowBottom > div.panelTop, div.rowBottom > div.panel, div.rowBottom > div.panelBottom
+    {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 40px;
+        padding-right: 40px;
+        background-color: white;
+        overflow: auto;
+    }
+    
+    Actually, I think that is already taken care of by:
+    div.panelTop, div.panelBottom, div.panel {
+        /* same stuff as above */
+    }
+*/
+
+div.panelTop {
+    border-top: 2px solid black;
+    border-left: none;
+    border-right: none;
+}
+div.panel {
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;    
+}
+div.panelBottom {
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid black;
+}
+div.panelTop, div.panelBottom, div.panel {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: white;
+    overflow: auto;
+
+}
 div.cellTop {
     border-top:    2px solid black;
     border-left:   2px solid black;
@@ -27,16 +78,18 @@ div.cellBottom{
 div.roundedBottom {
     border-radius: 0px 0px 5px 5px;            
 }
+
+/*
 div.panel{
     border-top:    2px solid rgb(0,0,125);
     border-left:   2px solid rgb(0,0,125);
     border-right:  2px solid rgb(0,0,125);
     border-bottom: 2px solid rgb(0,0,125);
-    /* border-radius: 5px 5px 5px 5px; */
     padding: 20px;
     background-color: lightblue;
     overflow: auto;
 }
+*/
 div.content{
     border-top:    2px solid black;
     border-left:   2px solid black;
@@ -62,6 +115,12 @@ div.separate > div.cellBottom:not(:last-child) {
 .text-center {
     text-align: center;
 }
+.text-right {
+    text-align: right;
+}
+.text-left {
+    text-align: left;
+}
 body {
     background-color: black;
     padding-top: 56px;
@@ -82,3 +141,6 @@ li.active {
     border-radius: 5px;
 }
 
+p {
+    padding-top: 1em;
+}

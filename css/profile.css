@@ -40,9 +40,20 @@ div.separate > div.cellTop:not(:first-child) {
 div.separate > div.cellBottom:not(:last-child) {
   margin-bottom: 20px;
 }
-ul {
-    list-style-position: inside;
-}
-div.vocabBox {
+
+hr {
+    margin-top: 20px;
     margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+.heading {
+    font-size: 23px;   
+}
+.text-highlight {
+    background: rgba(0,0,0,0.1);
+}
+
+div.aboutCell {
+    padding-top: 25px;
 }

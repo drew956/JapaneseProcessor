@@ -1,0 +1,74 @@
+ {
+    {
+        "日本人は、お風呂が大好きです。",
+        {
+            "日本人: Japanese person",
+            "お風呂: bathtub" 
+            "大好き: love",
+            "です: is",
+            {
+                "は",
+                "が",
+            }
+        }
+    },
+    {
+        "毎日、お風呂に入る人が、多いです。",
+        {
+            "毎日: every day",
+            "お風呂: bathtub",
+            "入る: to enter",
+            "人: person, people",
+            "多い: many",
+            "です: is",
+            {
+                "に", "direction indicator", "specifically with verb 'に入る'",
+                "が", "subject indicator"
+            
+            }
+        }
+    },
+    {
+        "日本は、夏は暑くて、冬は寒い国です。",
+        {
+            "日本: japan",
+            "夏: summer",
+            "暑い: hot",
+            "冬: winter",
+            "寒い: cold",
+            "国: country",
+            "です: is",
+            {
+                "は subject indicator",
+                "は contrastive"
+            },
+            {
+                "te form (specifically of i adjectives)",
+                "modification of a noun using an adjective or verb"
+            }
+        }
+    },
+    {
+        "だから、いつでもお風呂に入りたくなるのです。",
+        {
+            "だから: thus, because of (that)",
+            "いつでも: anytime",
+            "お風呂: bathtub",
+            "に: to, towards, in",
+            "入りたく: want to enter (adverb)",
+            "なる: to become",
+            "です: is",
+            {
+                "に",
+                "の"
+            
+            },
+            {
+                "volitional form of verbs",
+                "adverbal form of i adjectives",
+                "adverb + naru: to become",
+                "assertion of fact: no"
+            },
+        }
+    }
+}

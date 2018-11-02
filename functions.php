@@ -159,7 +159,7 @@ function setUpNavBar($active){
         "Home" => "home.php",
         "Books" => "books.php",
         "Logan" => array(
-            "Activities" => "activity.php",
+            "Activity"   => "activity.php",
             "Profile"    => "profile.php")
     );
     $elements = array();
