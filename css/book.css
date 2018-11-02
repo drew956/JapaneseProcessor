@@ -43,6 +43,12 @@ div.separate > div.cellBottom:not(:last-child) {
 ul {
     list-style-position: inside;
 }
-div.vocabBox {
+div.vocabBox, div.grammarBox {
     margin-bottom: 20px;
+    background: silver;
+
+}
+div#textBox {
+    padding-left: 20px;
+    padding-right: 20px;
 }

@@ -8,25 +8,25 @@
         ?>
         <div class="container-fluid" style="border: 1px solid black;">
             <div class='row' style=" ">
-                <div class='panel col-lg-12 col-md-12' style="text-align: center;">
+                <div class='panel col-lg-12 col-md-12 text-center'>
                     <div class="row cellTop headerCell">
-                        <div class='col-xs-12 col sm-12 col-lg-12 col-md-12' style="text-align: center; ">
+                        <div class='col-xs-12 col sm-12 col-lg-12 col-md-12 text-center'>
                             日本のお風呂
                         </div>
                     </div>
                     <div class="row cell ">
-                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4' style="text-align: center; ">
+                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4 text-center'>
                             <button id="vocab"><p>Vocabulary</p></button>
                         </div>
-                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4' style="text-align: center; ">
+                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4 text-center'>
                             <button id="book"><p>日本のお風呂</p></button>
                         </div>
-                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4' style="text-align: center; ">
+                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4 text-center'>
                             <button id="grammar"><p>Grammar</p></button>
                         </div>
                     </div>
-                    <div class="row cellBottom ">
-                        <div id="textBox" class='col-xs-12 col sm-12 col-lg-12 col-md-12' style="text-align: center; ">
+                    <div id="textBox" class="row cellBottom ">
+                        <div  class='col-xs-12 col-12 sm-12 col-lg-12 col-md-12 text-center'>
                             <p>
                                 日本人は、お風呂が大好きです。
                                 毎日、お風呂に入る人が、多いです。
@@ -41,12 +41,25 @@
                                 お風呂の時間は、とても大切な時間です。
                             </p>                        
                         </div>
+                        <div class="col-6 text-left">
+                            <span onclick="alert('hello');">< </span>
+                        </div>
+                        <div class="col-6 text-right">
+                            >
+                        </div>
                     </div>
                 </div>
             </div>
 
         </div>
         <script>
+        
+/* 
+
+    Prototype example of data that the server will send to the client.
+    Should also have a page tag or something so we can easily figure out what page we are working with.
+    
+*/
 var data =  
 [
     {
@@ -189,16 +202,27 @@ function displayAndFormatVocabulary(){
     document.getElementById("textBox").innerHTML = html;
 }
 function displayAndFormatText(){
-    var html = "<p>\n";
+    var html = "<div class='col-12 text-center'><h3> Page " + getCurrentPageNumber() + " </h3></div>\n";
+
+    html += "<p>\n";
     data.forEach(function(obj){
         html += obj.sentence;
     });
     html += "</p>\n";
+
+    
+    html += '<div class="col-6 text-left">' +
+        '<span onclick="alert(\'prior page\');">< </span>' +
+        '</div>' +
+        '<div  onclick="alert(\'next page\')"class="col-6 text-right">' +
+         '  > ' +
+         '</div>';
+    
     document.getElementById("textBox").innerHTML = html;
 }
 
 function displayAndFormatGrammar(){
-    var html = "";
+    /*var html = "";
     data.forEach(function(obj){
         if(obj.grammar){
             html += "<div class='col-12'>\n<span class='grammar-box'>";
@@ -207,6 +231,19 @@ function displayAndFormatGrammar(){
             }
             html += "</span></div>\n";
         }
+    });
+    */
+    var html = "";
+    html += "<div class='col-12 text-center'><h3> Page " + getCurrentPageNumber() + ": Grammar </h3></div>\n";
+    data.forEach(function(obj){
+        html += "<div class='col col-12 cell grammarBox'>\n";
+        html += "<div class='row text-center cell'>\n<div class='col-12'>" + obj.sentence + "</div>\n</div>\n";
+        for(i = 0; obj.grammar && i < obj.grammar.length; i++){
+            html += "<div class='row'>\n";
+            html += "<div class='col-12 col-md-12 col-lg-12 text-center'>" + obj.grammar[i] + "</div>\n";
+            html += "</div>";
+        }
+        html += "</div>\n";
     });
     document.getElementById("textBox").innerHTML = html;
 }
