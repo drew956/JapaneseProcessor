@@ -1,0 +1,23 @@
+.floated-div:after {
+    content:'';
+    display:block; /* or whatever else than inline */
+    clear:both;
+}
+
+.message-box {
+    background: pink;
+    padding: 20px;
+}
+
+.task-box {
+    box-shadow: 5px 5px 1px purple;
+    border: 1px solid black;
+    padding: 10px;
+    overflow: hidden;
+    color: goldenrod;
+    background: rgba(0,0,125,0.5);
+}
+
+.task-box > a {
+    float: right;
+}

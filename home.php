@@ -2,15 +2,10 @@
     require_once("functions.php");
 ?>
 <?php
-            printHead("Home", array("main_style.css"));
+            printHead("Home", array("main_style.css", "home.css"), array("home.js"));
             setUpNavBar("Home");
         ?>
         <div class="container-fluid" style="border: 1px solid black;">
-            <div class="row text-center" style="background-color: rgba(0,0,191,0.5); color: green;">
-                <div class="col-md-12 col-lg-12">
-                    <h1>Test</h1>
-                </div>
-            </div>
             <div class='row' style=" ">
                 <div class='panel col-lg-3 col-md-3' style="text-align: center;">
                     <div class="">
@@ -18,8 +13,13 @@
                     </div>
                 </div>
                 <div class='panel col-lg-6 col-md-6 text-center' >
-                    <div class=' col-lg-12 col-md-12 text-center' >
+                    <div class='message-box floated-div col-lg-12 col-md-12 text-center' >
                         <?php
+                        $_SESSION["state"] = "review";
+
+                        createTaskBox();
+
+                        /*
                         $images = array(
                             "book.jpg",
                             "Japanese Baths",
@@ -29,10 +29,12 @@
                             "Something else"
                         );
                         printCarousel($images);
+                        */
                         ?>
+                        
                     </div>
                 </div>
-                <div class='panel separate col-lg-3 col-md-3' style="text-align: center;">
+                <div class='panel separate col-lg-3 col-md-3' style="text-align: center; clear: both;">
                     <div class="content">
                         <p>Recently studied Kanji and Vocabulary</p>
                         <p>Clickable to allow you to go and look up specific words??</p>

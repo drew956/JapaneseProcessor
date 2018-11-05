@@ -63,7 +63,7 @@ function navBar($elements){
     
     
     
-function printHead($title, $styles = array(), $script = array()){
+function printHead($title, $styles = array(), $scripts = array()){
 ?>
 <!Doctype html>
 <html lang=en>
@@ -91,7 +91,7 @@ print(
 <?php
 foreach($scripts as $script){
 print(
-"        <script src='js/$script'></script>/n"
+"        <script src='js/$script'></script>\n"
 );
 } 
 ?>
@@ -177,5 +177,37 @@ function setUpNavBar($active){
         }
     }
     navBar($elements);
+}
+
+function getTaskUrl(){
+    $url = "http://www.google.com";
+    if($_SESSION["state"] == "review"){
+        $url = "review.php";
+    } else if($_SESSION["state"] == "reading") {
+        $url = "book.php";
+    }
+    return $url;
+}
+/* 
+    How are we going to handle the javascript hmmm.
+*/
+function createTaskBox(){
+    $msg = "default message. Shouldn't be seen normally. (or, like, ever.)\n";                        
+    if($_SESSION["state"] == "review"){
+        //really should grab the appropraite message from the database
+        //customized for whomever the recipient is based on their status/state
+        $msg = "<p>Welcome to week 1 of the study. Please continue to review the vocabulary.</p>";
+    } else if($_SESSION["state"] == "reading") {
+        $msg = "<p>Welcome to week 1 of the study. Please continue to reading the text. When can take the quiz "
+        . "whenever you are ready.</p>";
+    } 
+?>
+<div class="task-box">
+<?php
+    echo $msg . "\n";
+?>
+    <a href="<?php echo getTaskUrl(); ?>" ><button type="button" id="task-button">Continue</button></a>
+</div>
+<?php
 }
 ?>
