@@ -5,10 +5,6 @@ To do:
             - Grammar Quiz
             - Vocabulary Quiz
         - or make it so that section changes depending on your state   
-    - vocabulary.js 
-        - right now when we try to reset the flashcard before moving to the right or left it
-        - results in the reset happening AFTER we update the flashcard 
-        - needs to be fixed. Maybe trigger reset without animating?
     - 
     - 
     

@@ -1,0 +1,13 @@
+#card {
+    height: 41px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#quiz {
+    visibility: hidden;
+}
+
+.edgepad {
+    padding: 10px;
+}

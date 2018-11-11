@@ -182,7 +182,7 @@ function setUpNavBar($active){
 function getTaskUrl(){
     $url = "http://www.google.com";
     if($_SESSION["state"] == "review"){
-        $url = "review.php";
+        $url = "vocabulary.php";
     } else if($_SESSION["state"] == "reading") {
         $url = "book.php";
     }
