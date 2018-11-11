@@ -1,0 +1,11 @@
+.edgepad {
+    padding: 10px;
+}
+
+label {
+    white-space: normal !important;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}

@@ -20,13 +20,13 @@
                         </div>
                     </div>
                     <div class="row cell ">
-                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4 text-center'>
+                        <div class='col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4 text-center'>
                             <button id="vocab"><p>Vocabulary</p></button>
                         </div>
-                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4 text-center'>
+                        <div class='col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4 text-center'>
                             <button id="book"><p>Kanji</p></button>
                         </div>
-                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4 text-center'>
+                        <div class='col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4 text-center'>
                             <button id="grammar"><p>Grammar</p></button>
                         </div>
                     </div>
@@ -421,24 +421,6 @@ function displayAndFormatGrammar(){
     var html = "";
     html += "<div class='col-12 text-center'><h3> Page " + getCurrentPageNumber() + ": Grammar </h3></div>\n";
     data.forEach(function(obj){        
-        /*
-        html += "<div class='col col-12 grammarBox'>\n";
-        html += "<div class='row text-center cellTop headerCell'>\n<div class='col-12'>" + obj.sentence + "</div>\n</div>\n";
-        for(i = 0; obj.grammar && i < obj.grammar.length - 3; i+=2){
-            html += "<div class='row cell'>\n";
-            html += "<div class='col-6 text-center'>" + obj.grammar[i] + "</div>\n";
-            html += "<div class='col-6 text-center'>" + obj.grammar[i+1] + "</div>\n";
-            html += "</div>";
-        }
-        //last one has to be a cellBottom
-        if(obj.grammar){
-            html += "<div class='row cellBottom'>\n";
-            html += "<div class='col-6 text-center'>" + obj.grammar[obj.grammar.length - 2] + "</div>\n";
-            html += "<div class='col-6 text-center'>" + obj.grammar[obj.grammar.length - 1] + "</div>\n";
-            html += "</div>";
-        }
-        html += "</div>\n";
-        */
         html += "<div class='col col-12 grammarBox'>\n";
         html += "<div class='row text-center cellTop headerCell'>\n<div class='col-12'>" + obj.sentence + "</div>\n</div>\n";
         for(i = 0; obj.grammar && i < obj.grammar.length - 3; i+=2){
@@ -459,8 +441,13 @@ function displayAndFormatGrammar(){
     html += "<div class='col-12 text-right'>" + 
     "<button id='studygrammar'>Take Grammar Quiz</button>" +
     "</div>\n";
-
     document.getElementById("textBox").innerHTML = html;
+    
+    $("#studygrammar").click(
+        function(){
+            document.location = "grammar.php";
+        }
+    );
 }
 $("#vocab").click(displayAndFormatVocabulary);
 $("#book").click(displayAndFormatText);
