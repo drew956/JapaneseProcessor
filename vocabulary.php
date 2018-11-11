@@ -11,30 +11,20 @@
     require_once("functions.php");
 ?>
 <?php
-            printHead("Review", array("main_style.css", "review.css"), array("flip.js", "review.js"));
+            printHead("Vocabulary", array("main_style.css", "vocabulary.css"), array("flip.js", "vocabulary.js"));
             setUpNavBar("Books");
 
         ?>
         <div class="container-fluid" style="border: 1px solid black;">
             <div class='row' style=" ">
                 <div class='panel col-lg-12 col-md-12 text-center'>
-                    <div class="row cellTop headerCell">
-                        <div class='col-xs-12 col sm-12 col-lg-12 col-md-12 text-center'>
-                            日本のお風呂
-                        </div>
-                    </div>
-                    <div class="row cell ">
-                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4 text-center'>
-                            <button id="vocab"><p>Vocabulary</p></button>
-                        </div>
-                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4 text-center'>
-                            <button id="book"><p>日本のお風呂</p></button>
-                        </div>
-                        <div class='col-xs-4 col sm-4 col-lg-4 col-md-4 text-center'>
-                            <button id="grammar"><p>Grammar</p></button>
+                    <div id="textBox" class="row cellTop headerCell">
+                        <div  id='count' class='col-xs-12 col-12 sm-12 col-lg-12 col-md-12 text-center'>
+                            Word 1 of 24
                         </div>
                     </div>
                     <div id="textBox" class="row cellBottom ">
+                        
                         <div  class='col-xs-12 col-12 sm-12 col-lg-12 col-md-12 text-center'>
                             <div id="card"> 
                                 <div class="front"> 

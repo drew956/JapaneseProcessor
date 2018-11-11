@@ -52,3 +52,63 @@ div#textBox {
     padding-left: 20px;
     padding-right: 20px;
 }
+
+
+
+
+/* 
+    Popup styles
+*/
+.popup {
+    background-color: #FFEEEE !important; 
+    color: #000000; 
+    font-style: italic
+}
+.listpinyin{
+    background-color: #FFFFDD; color: #000000; font-style: italic
+}
+.summary_jyutping{
+    background-color: #FFEEEE; color: #000000; font-style: italic
+}
+.summary_pinyin{
+    background-color: #FFFFDD; color: #000000; font-style: italic
+}
+.olibborder{
+    padding: 0px;
+    margin: 0px;
+    background-color: #5F5B47;
+
+}
+.olibbody{
+    padding: 4px;
+    margin: 0px;
+    background-color: #ffcfad;
+    color: #000000;
+    font-size: 11pt;
+    text-align: center;
+    width: 100%;
+}
+.olibcaption{
+    padding: 0px;
+    margin: 0px;
+    background-color: #8F8864;
+    color: #ffffff;
+    font-size: 12pt;
+    font-weight: normal;
+    width: 100%;
+}
+
+.olibunicodecaption{
+    font-size: 3.5em;
+    font-family: 'AR PL UKai HK','AR PL UKai','AR PL ZenKai Uni','AR PL KaitiM Big5','DFKai-SB','KaiTi','FangSong','AR PL UMing','MingLiu';
+    color: #ffffff;
+    text-align: center;
+    font-weight: normal;
+    border: 1px black solid;
+    width: 100%;
+}
+.olibpron{ /* jyutping or pinyin */
+    font-style: italic;
+    color: #ee1111;
+    font-size: 10pt;
+}
