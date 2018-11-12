@@ -12,7 +12,7 @@
 ?>
 <?php
             printHead("Vocabulary", array("main_style.css", "vocabulary.css"), array("flip.js", "vocabulary.js"));
-            setUpNavBar("Books");
+            setUpNavBar("Study");
 
         ?>
         <div class="container-fluid" style="border: 1px solid black;">

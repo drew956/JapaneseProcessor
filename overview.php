@@ -1,13 +1,14 @@
 <?php 
     /*
-        Should have the php script (this page) check what book they are working on
-        and insert that title at the top 
+        This is from here on out the "overview" page for a given text. 
+        It should load the data from the server and should 
+        There isn't really 
     */
     require_once("functions.php");
 ?>
 <?php
-            printHead("Read", array("main_style.css", "book.css"), array("book.js"));
-            setUpNavBar("Read");
+            printHead("Overview", array("main_style.css", "overview.css"), array("overlibmws.js", "overlibdefaults.js", "overview.js"));
+            setUpNavBar("Study");
 
         ?>
         <div class="container-fluid" style="border: 1px solid black;">
@@ -15,10 +16,21 @@
                 <div class='panel col-lg-12 col-md-12 text-center'>
                     <div class="row cellTop headerCell">
                         <div class='col-xs-12 col sm-12 col-lg-12 col-md-12 text-center'>
-                            <h3>日本のお風呂</h3>
+                            日本のお風呂
                         </div>
                     </div>
-                    <div id="textBox" class="row cellBottom edgepad ">
+                    <div class="row cell ">
+                        <div class='col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4 text-center'>
+                            <button id="vocab"><p>Vocabulary</p></button>
+                        </div>
+                        <div class='col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4 text-center'>
+                            <button id="book"><p>Kanji</p></button>
+                        </div>
+                        <div class='col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4 text-center'>
+                            <button id="grammar"><p>Grammar</p></button>
+                        </div>
+                    </div>
+                    <div id="textBox" class="row cellBottom ">
                         <div  class='col-xs-12 col-12 sm-12 col-lg-12 col-md-12 text-center'>
                             <p>
                                 日本人は、お風呂が大好きです。
@@ -45,8 +57,6 @@
             </div>
 
         </div>
-        <script>
-        </script>
 <?php
     printFoot();
 ?>

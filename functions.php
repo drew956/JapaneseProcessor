@@ -157,7 +157,17 @@ END;
 function setUpNavBar($active){
     $content = array(
         "Home" => "home.php",
-        "Books" => "books.php",
+        "Study" => array(
+            /* should */
+            "Overview" => "overview.php?id=${_SESSION['current_book']}",
+            
+            "Vocabulary" => "vocabulary.php",
+            "Grammar" => "grammar.php"
+        ),
+        "Read" => "book.php",
+        /*
+        "Books" => "books.php", */
+        "Quiz" => "quiz.php",
         "Logan" => array(
             "Activity"   => "activity.php",
             "Profile"    => "profile.php")
@@ -182,7 +192,7 @@ function setUpNavBar($active){
 function getTaskUrl(){
     $url = "http://www.google.com";
     if($_SESSION["state"] == "review"){
-        $url = "vocabulary.php";
+        $url = "overview.php";
     } else if($_SESSION["state"] == "reading") {
         $url = "book.php";
     }

@@ -8,16 +8,25 @@ To do:
             - or make it so that section changes depending on your state   
     
     book.php
+        - should load 5 pages at a time I believe. 
+            - less than 5 is too small. More than 5 might be overwhelming.
+        - General aesthetics
+            - needs some padding
+                - look at the button on the bottom of the page
+            - 
         - Kanji tab doesn't load any kanji.
             - what kind of kanji information do we want? do we even need this tab?
             - isn't the kanji the user learns basically just the reading of the words
             - with kanji, or the single 1 kanji words, which are few.
             - put kanji in the 
         - Grammar isn't actually how we want grammar yet
-            - go back through and write grammar titles and then grammar explanations
-            - make the code pull this information out and display it somewhat nicely
-            - without this we cannot create the grammar quiz.
-            - also create some examples
+            - make the title of the box the title of the grammar point, and separate them into their own 
+              grammar points.
+            - each page or book should have a list of grammar.
+            - that list should be pulled and listed here, so there are no repeats.
+            - if it were on a per-sentence basis, then there would be a bajillion repeats.
+                - unless we gathered all of the unique grammar tags and 
+                - pulled explanations based on that.
         - 
     
     books.php
@@ -35,16 +44,6 @@ To do:
         
     
     grammar.php
-        - the questions should test their knowledge. 
-            - thus they should be either fill in the blank, 
-            - multiple choice involving grammar usage (conjugation, etc)
-            - or choose the correct translation of the following blah blah
-            - which means there will be multiple types of questions being pulled from the DB
-                - how do we want to handle the answer-checking?
-                - client side is bad practice, but would be easy to implement
-                - server side is ideal, 
-                    - we could have the id of the inputs be the type of input they are + their id in the DB
-                    - thus the DB could easily look up the correct answer and know how to process the data
     
     quiz.php
         - this should basically be a buffed up merger between vocabular.php and grammar.php
@@ -52,7 +51,7 @@ To do:
                 - no I don't think so
             - but this implies that the questions in the DB need to be labeled as practice or test
                 so that is a DB consideration. Another column, perhaps. 
-        - 
+            - should be fixed and designed on a per-text basis I believe.
     
     feedback.php    
         - this should be pretty standard, aside from potentially including the actual translations of texts
