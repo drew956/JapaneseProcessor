@@ -943,10 +943,12 @@ END;
     public function joinSpecific($cols, $table2, $columns, $values){
         $sql = "SELECT $cols FROM " . $this->tbl_name . " JOIN " . $table2 . " ON ";
 
-        for($i = 0; ($i < count($columns)); $i++, $sql .= " AND "){
-            $sql .= "'" . $columns[$i] . "'='" . $values[$i] . "'";
+        for($i = 0; ($i < count($columns)); $i++){
+            $sql .= "" . $columns[$i] . "=" . $values[$i] . "";
+            if($i != 0)
+                $sql .= " AND ";
         }
-        return getRowsAssoc(mysql_query($sql));
+        return Table::getRowsAssoc(mysql_query($sql));
     }
 }
 
