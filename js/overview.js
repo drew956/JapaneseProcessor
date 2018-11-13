@@ -377,7 +377,19 @@ function displayAndFormatGrammar(){
         }
     );
 }
+serverData = [];
 $(function(){
+    /* 
+        get and load the data from the server.
+    */
+    $.ajax({
+        url: "get_vocab.php",
+    })
+    .done(function( data ) {
+        serverData = JSON.parse(data);
+        console.log(serverData);
+    });
+    
     $("#vocab").click(displayAndFormatVocabulary);
     $("#book").click(displayAndFormatText);
     $("#grammar").click(displayAndFormatGrammar);

@@ -940,6 +940,14 @@ END;
         }
         return mysql_query($sql);
     }
+    public function joinSpecific($cols, $table2, $columns, $values){
+        $sql = "SELECT $cols FROM " . $this->tbl_name . " JOIN " . $table2 . " ON ";
+
+        for($i = 0; ($i < count($columns)); $i++, $sql .= " AND "){
+            $sql .= "'" . $columns[$i] . "'='" . $values[$i] . "'";
+        }
+        return getRowsAssoc(mysql_query($sql));
+    }
 }
 
 function connectDB($domain, $username, $pass, $db){    
