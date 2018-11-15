@@ -15,8 +15,7 @@
                 <div class='panel col-lg-6 col-md-6 text-center' >
                     <div class='message-box floated-div col-lg-12 col-md-12 text-center' >
                         <?php
-                        $_SESSION["state"] = "review";
-
+                        
                         createTaskBox();
 
                         /*

@@ -1,0 +1,9 @@
+.error-msg {
+    color: red;
+    background: rgba(0,111,0,0.3);
+    padding: 10px;
+}
+
+form{
+    padding: 10px;
+}

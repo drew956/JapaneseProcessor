@@ -76,7 +76,18 @@ function displayAndFormatText(){
     */
     document.getElementById("textBox").innerHTML = html;
     $("#quiz").click(function(){
-        document.location = "quiz.php";
+        $.ajax({
+            url: "next_state.php",
+        })
+        .done(function( data ) {
+            /*
+            if(data == "success"){
+                document.location = "quiz.php";
+            }else {
+            */
+                alert(data);
+            //}
+        });
     });
 
 }

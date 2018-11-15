@@ -9,9 +9,7 @@
     require_once("LH_Library.php");
     require_once("functions.php");
     
-    $conn = connectDB("localhost", "root", "root", "mydb");
-    if(!$conn)
-        die("noooo\n");
+    connectToDB();
     mysql_set_charset("utf8");
 
 

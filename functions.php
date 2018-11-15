@@ -3,7 +3,7 @@
         Functions that will help customize / make the site more flexible
         
     */
-    
+
 function getNavLink($text, $href = "#", $class=""){
     return "<li class='nav-item $class'>
                 <a class='nav-link' href='$href'>$text</a>
@@ -60,10 +60,22 @@ function navBar($elements){
     
     
     
+/*
+    Not the most elegant solution... 
+    but if we let this run on login.php we get infinite redirects.
+*/    
+function gateway(){
+    if(!isset($_SESSION['username']) && basename($_SERVER['PHP_SELF']) != 'login.php' ){
+        header("Location: login.php");
+        echo "<html><body><a href='login.php'>Click me to login!</a></body></html>";
+        //if doesn't listen to headers
+        die();
+    }
+}    
     
-    
-    
+
 function printHead($title, $styles = array(), $scripts = array()){
+gateway();
 ?>
 <!Doctype html>
 <html lang=en>
@@ -146,6 +158,17 @@ END;
 
 }
 
+
+
+
+
+function getStatePhaseBookId(){
+    $state   = $_SESSION['state'];
+    $phase   = $state % 3; //phase starts at 1 so oddly goes 1 2 0, should have phase start at 0..
+    $book_id = (floor( ($state - $phase)/3 ) + 1);
+    
+    return array("state" => $state, "phase" => $phase, "book_id" => $book_id);
+}
 /* 
     For the purpose of this website the navbar will be static.
     I.e. it will not suddenly have new items in it just because you are on a different page.
@@ -155,23 +178,35 @@ END;
     NOTICE this function uses "active", which is the name of the item in the navbar to highlight
 */
 function setUpNavBar($active){
-    $content = array(
-        "Home" => "home.php",
-        "Study" => array(
-            /* should */
-            "Overview" => "overview.php?id=${_SESSION['current_book']}",
-            
-            "Vocabulary" => "vocabulary.php",
-            "Grammar" => "grammar.php"
-        ),
-        "Read" => "book.php",
-        /*
-        "Books" => "books.php", */
-        "Quiz" => "quiz.php",
-        "Logan" => array(
+    $content = array("Home" => "home.php");
+    
+    //the idea is that there are 3 main states across a few texts.
+    //thus %3 we get which phase they are in, and without mod 3 we get which text
+    $data = getStatePhaseBookId();
+    switch($data['state']){
+        case 0:
+            $content["Study"] = array(
+                "Overview"   => "overview.php?id=$book_id", //${_SESSION['current_book']}",            
+                "Vocabulary" => "vocabulary.php",
+                "Grammar"    => "grammar.php"
+            );
+            break;
+        case 1:
+            $content["Read"] = "book.php";
+            break;
+        case 2:
+            $content["Quiz"] = "quiz.php";
+            break;
+    }
+    
+    $title   = isset($_SESSION['username']) ? $_SESSION['username'] : "Login";
+    $submenu = isset($_SESSION['username']) ? array(
             "Activity"   => "activity.php",
-            "Profile"    => "profile.php")
-    );
+            "Profile"    => "profile.php" , 
+            "Logout"     => "logout.php"   ) : "login.php";
+    
+    $content[$title] = $submenu;
+
     $elements = array();
     foreach($content as $name => $href){
         if(gettype($href) == "array"){ //if it is a dropdown
@@ -190,11 +225,21 @@ function setUpNavBar($active){
 }
 
 function getTaskUrl(){
-    $url = "http://www.google.com";
-    if($_SESSION["state"] == "review"){
-        $url = "overview.php";
-    } else if($_SESSION["state"] == "reading") {
-        $url = "book.php";
+    $data = getStatePhaseBookId();
+    $url = "";
+    switch($data["state"]){
+        case 0:
+            $url = "overview.php";
+            break;
+        case 1:
+            $url = "book.php?id=" . $data['book_id']; 
+            break;
+        case 2:
+            $url = "quiz.php";
+            break;
+        default:
+            $url = "http://www.google.com";
+            break;            
     }
     return $url;
 }
@@ -202,15 +247,23 @@ function getTaskUrl(){
     How are we going to handle the javascript hmmm.
 */
 function createTaskBox(){
-    $msg = "default message. Shouldn't be seen normally. (or, like, ever.)\n";                        
-    if($_SESSION["state"] == "review"){
-        //really should grab the appropraite message from the database
-        //customized for whomever the recipient is based on their status/state
-        $msg = "<p>Welcome to week 1 of the study. Please continue to review the vocabulary.</p>";
-    } else if($_SESSION["state"] == "reading") {
-        $msg = "<p>Welcome to week 1 of the study. Please continue to reading the text. When can take the quiz "
-        . "whenever you are ready.</p>";
-    } 
+    $data = getStatePhaseBookId();
+    $msg = "";                        
+    switch($data["state"]){
+        case 0:
+            $msg = "<p>Welcome to week 1 of the study. Please continue to review the vocabulary and grammar.</p>";
+            break;
+        case 1:
+            $msg = "<p>Welcome to week 1 of the study. Please continue reading the text. You can take the quiz "
+            . "whenever you are ready.</p>";
+            break;
+        case 2:
+            $msg = "<p>Welcome to week 1 of the study. Please continue to the comprehension quiz.</p>";
+            break;
+        default:
+            $msg = "default message. Shouldn't be seen normally. (or, like, ever.)\n";                        
+            break;            
+    }
 ?>
 <div class="task-box">
 <?php
@@ -220,4 +273,144 @@ function createTaskBox(){
 </div>
 <?php
 }
+
+
+
+/*
+    Class created by:  linblow at hotmail dot fr
+    Use the static method getInstance to get the object.
+*/
+
+class Session
+{
+    const SESSION_STARTED = TRUE;
+    const SESSION_NOT_STARTED = FALSE;
+    
+    // The state of the session
+    private $sessionState = self::SESSION_NOT_STARTED;
+    
+    // THE only instance of the class
+    private static $instance;
+    
+    
+    private function __construct() {}
+    
+    
+    /**
+    *    Returns THE instance of 'Session'.
+    *    The session is automatically initialized if it wasn't.
+    *    
+    *    @return    object
+    **/
+    
+    public static function getInstance()
+    {
+        if ( !isset(self::$instance))
+        {
+            self::$instance = new self;
+        }
+        
+        self::$instance->startSession();
+        
+        return self::$instance;
+    }
+    
+    
+    /**
+    *    (Re)starts the session.
+    *    
+    *    @return    bool    TRUE if the session has been initialized, else FALSE.
+    **/
+    
+    public function startSession()
+    {
+        if ( $this->sessionState == self::SESSION_NOT_STARTED )
+        {
+            $this->sessionState = session_start();
+        }
+        
+        return $this->sessionState;
+    }
+    
+    
+    /**
+    *    Stores datas in the session.
+    *    Example: $instance->foo = 'bar';
+    *    
+    *    @param    name    Name of the datas.
+    *    @param    value    Your datas.
+    *    @return    void
+    **/
+    
+    public function __set( $name , $value )
+    {
+        $_SESSION[$name] = $value;
+    }
+    
+    
+    /**
+    *    Gets datas from the session.
+    *    Example: echo $instance->foo;
+    *    
+    *    @param    name    Name of the datas to get.
+    *    @return    mixed    Datas stored in session.
+    **/
+    
+    public function __get( $name )
+    {
+        if ( isset($_SESSION[$name]))
+        {
+            return $_SESSION[$name];
+        }
+    }
+    
+    
+    public function __isset( $name )
+    {
+        return isset($_SESSION[$name]);
+    }
+    
+    
+    public function __unset( $name )
+    {
+        unset( $_SESSION[$name] );
+    }
+    
+    
+    /**
+    *    Destroys the current session.
+    *    
+    *    @return    bool    TRUE is session has been deleted, else FALSE.
+    **/
+    
+    public function destroy()
+    {
+        if ( $this->sessionState == self::SESSION_STARTED )
+        {
+            $this->sessionState = !session_destroy();
+            unset( $_SESSION );
+            
+            return !$this->sessionState;
+        }
+        
+        return FALSE;
+    }
+}
+
+
+/*
+    Putting this here so I don't have to change it in all the pages once it goes live.
+    
+*/
+function connectToDB(){
+    $conn = connectDB("localhost", "root", "root", "mydb");
+    if(!$conn)
+        die("noooo\n");
+
+}
+
+
+
+//bad form, but makes it convenient
+session_start();
 ?>
