@@ -928,7 +928,7 @@ END;
             //oh wait, that would be the same anyways.
             $sql .= "'" . $columns[$i] . "'='" . $values[$i] . "'";
         }
-        return mysql_query($sql);
+        return Table::getRowsAssoc(mysql_query($sql));
     }
     public function join2($table2, $hash){
         $sql = "SELECT * FROM " . $this->tbl_name . " JOIN " . $table2 . " ON ";
@@ -940,7 +940,7 @@ END;
         }
         return mysql_query($sql);
     }
-    public function joinSpecific($cols, $table2, $columns, $values){
+    public function joinSpecific($cols, $table2, $columns, $values, $extra = ""){
         $sql = "SELECT $cols FROM " . $this->tbl_name . " JOIN " . $table2 . " ON ";
 
         for($i = 0; ($i < count($columns)); $i++){
@@ -948,6 +948,7 @@ END;
             if($i != 0)
                 $sql .= " AND ";
         }
+        $sql .= " " . $extra;
         return Table::getRowsAssoc(mysql_query($sql));
     }
 }

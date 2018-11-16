@@ -58,19 +58,57 @@ function navBar($elements){
     
     
     
-    
-    
+/*
+    0 - prelearning
+    1 - engaging the text
+    2 - comprehension quiz, etc 
+
+    The blacklist are just the list of possible ones minus the current one.
+    So probably there is a better way of coding this. 
+    Oh well, this is customizable. 
+*/
+
+
+
+function redirected($location, $html = "<html><body><a href='home.php'>Click me!</a></body></html>"){
+    header("Location: $location");
+    echo $html;
+    //if doesn't listen to headers
+    die();
+}
+
 /*
     Not the most elegant solution... 
     but if we let this run on login.php we get infinite redirects.
 */    
 function gateway(){
-    if(!isset($_SESSION['username']) && basename($_SERVER['PHP_SELF']) != 'login.php' ){
-        header("Location: login.php");
-        echo "<html><body><a href='login.php'>Click me to login!</a></body></html>";
-        //if doesn't listen to headers
-        die();
+    //would have to use global keyword, so I'd rather include it here for now.
+    //this isn't a very good idea though.
+    $black_list = array(
+        0 => array(
+            "quiz.php",
+            "book.php"
+        ),
+        1 => array(
+            "overview.php",
+            "quiz.php",
+        ),
+        2 => array(
+            "overview.php",
+            "book.php",        
+        )
+    );
+    $page_name = basename($_SERVER['PHP_SELF']);
+    $data = getStatePhaseBookId();
+    
+    if(!isset($_SESSION['username']) && $page_name != 'login.php' ){
+        redirected("login.php");
     }
+
+    if(in_array($page_name, $black_list[$data["state"]])){
+        redirected("home.php");        
+    }
+    
 }    
     
 
@@ -165,9 +203,10 @@ END;
 function getStatePhaseBookId(){
     $state   = $_SESSION['state'];
     $phase   = $state % 3; //phase starts at 1 so oddly goes 1 2 0, should have phase start at 0..
-    $book_id = (floor( ($state - $phase)/3 ) + 1);
+    $book_id = floor($state/3);
     
-    return array("state" => $state, "phase" => $phase, "book_id" => $book_id);
+    //return array("state" => $state, "phase" => $phase, "book_id" => $book_id);
+    return array("state" => $phase, "book_id" => $book_id); //this is what we really mean by "state"
 }
 /* 
     For the purpose of this website the navbar will be static.

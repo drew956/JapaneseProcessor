@@ -19,74 +19,24 @@
 var data =  
 [
     {
-        qid: 1,
-        type: 'text',
-        prompt: "Please answer the following question.",
-        question: "What is an 温泉?",
-    },
-    {
-        qid: 2,
+        id: 1,
         type: 'radio',
-        prompt: "According to the story, what did people long ago know about 温泉?",
-        question: [
-            "温泉 are naturally occurring hot springs.",
-            "温泉 are good-feeling and are good for your health.",
-            "温泉 are unique to Japan.",
-            "温泉 are dangerous to stay in for too long."
-        ]
-    },
-    {
-        qid: 3,
-        type: 'radio',
-        prompt: "Are humans the only ones who like to bathe in 温泉?",
-        question: [
-            "Yes they are.",
-            "No they are not."
-        ]
-    },
-    {
-        qid: 4,
-        type: 'text',
-        prompt: "Please answer the following question.",
-        question: "What other creatures like to bathe in 温泉?"
-    },
-    {
-        qid: 5,
-        type: 'text',
-        prompt: "Please answer the following question.",
-        question: "What is a 蒸し風呂?"
-    },
-    {
-        qid: 6,
-        type: 'text',
-        prompt: "Please answer the following question.",
-        question: "How do you use a 蒸し風呂?"
-    },
-    {
-        qid: 7,
-        type: 'radio',
-        prompt: "Why did people long ago use 蒸し風呂?",
-        question: [
-            "They realized it would prevent wrinkles.",
-            "They wanted to invent new ways of bathing.",
-            "They could not use a lot of water like we can today.",
-            "They did not like 温泉."
+        question: "How long will this page take to load?",
+        answers: [
+            "A few minutes.",
+            "An hour.",
+            "It'll never load.",
+            "Trick question: it's already loaded."
         ]
     }
 ];
 
-/* This... idk. This shouldn't be here. 
-    I will remove it once I hook up the DB */
-function getCurrentPageNumber(){
-    return 1;
-}
-
-function getGrammarInput(id, type, prompt, question){
+function getGrammarInput(id, type, question, answers){
     html = "";
     switch(type){
         case "text":
             html = '<div class="form-group">' + "\n" +
-                        '<label>' + prompt +  "<br />" + "\n" + question +   
+                        '<label>' + "Please answer the following question." +  "<br />" + "\n" + question +   
                         '<input type="text" class="form-control" name="' + 'qid' + id + '" placeholder="Enter your answer here">' + "\n" +
                         '</label>' + "\n" +
                     "</div>";
@@ -95,10 +45,10 @@ function getGrammarInput(id, type, prompt, question){
         case "radio":
             html = '<div class="input-group col-12">' + "\n" +
                         '<div class="input-group-text">' + "\n" + 
-                            "<label class='text-left'>" + prompt + "<br />" + "\n";
+                            "<label class='text-left'>" + question + "<br />" + "\n";
                         
-            for(j = 0; j < question.length; j++){
-                html += '<input type="radio" name="' + 'qid' + id + '" value="' + j + '" />' + question[j] + '<br />';
+            for(j = 0; j < answers.length; j++){
+                html += '<input type="radio" name="' + 'qid' + id + '" value="' + j + '" />' + answers[j] + '<br />';
             }
             html +=        "</label>\n";
             html +=   "</div>\n" +
@@ -113,48 +63,29 @@ function getGrammarInput(id, type, prompt, question){
 
 function processAnswers(){
     alert("clicked me");
-    //should do something with ajax, or pass the data to a form to parse it
     return false;
 }
 
 function generateQuiz(){
-    html = $("form[name=quizform]")[0].innerHTML;
-    test = [ 
-        {
-            qid: 2,
-            type: 'radio',
-            prompt: "Please choose the best sentence:",
-            question: [
-                "お風呂を入る人が多いです。",
-                "多い人がお風呂に入ります。",
-                "お風呂に入る人が多いです。",
-                "多い人がお風呂を入ります。"
-            ]
-        }
-    ];
-    //html += getGrammarInput(test[0].qid, test[0].type, test[0].prompt, test[0].question);
-    
+    html = $("form[name=quizform]")[0].innerHTML; //this is probably unnecessary and unwanted.
+
     for(i = 0; i < data.length; i++){
-        html += getGrammarInput(data[i].qid, data[i].type, data[i].prompt, data[i].question);
+        html += getGrammarInput(data[i].id, data[i].type, data[i].question, data[i].answers);
     }
     
     html += "<button type='button' name='submit' onclick='processAnswers();' class='btn btn-primary'>" +  "Submit</button>\n";
     $("form[name=quizform]")[0].innerHTML = html;
 }
 
-/* 
-    For now we are not going to call this, because it should already be a quiz.
-    
-    Inserts the quiz into the dom.
-    Loads data for quiz from server
-*/
-function startQuiz(){
-    $("#cardrow").remove(); //should probably store and reattach later
-    $("#startdiv").remove();
-    $("#quiz").css("visibility", "visible");
-    generateQuiz();
-}
 
 $(function(){
-    generateQuiz();
+    //generateQuiz(); //to prevent default page from being jarring.
+    //actually... that is more jarring,
+    $.ajax({
+        url: "get_questions.php",
+    })
+    .done(function( dbdata ) {
+        data = JSON.parse(dbdata);
+        generateQuiz(); //generates the quiz once the data is loaded. Should make sure base page isn't too ugly, maybe add a "Please wait" message or something.
+    });
 });
